@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "ListAll";
+}
+
+<h2>ListAll</h2>
+
+<table>
+	<tr>
+		<
+		<td>Country Name</td>
+		<td>State  Name</td>
+		<td>District Name</td>
+
+	</tr>
+
+	@foreach (var item in ViewData["Jointable"] as IEnumerable<w.Models.Multipleclass>)
+	{
+		<tr>
+			<td>@item.countrydetails.CNAME</td>
+			<td>@item.statedetails.SNAME</td>
+			<td>@item.distdetails.DNAME</td>
+
+
+
+		</tr>
+	}
+</table>

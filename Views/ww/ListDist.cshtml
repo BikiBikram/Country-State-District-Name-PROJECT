@@ -1,0 +1,39 @@
+﻿@model IEnumerable<w.Models.DIST>
+
+@{
+    ViewBag.Title = "ListDist";
+}
+
+<h2>ListDist</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STATE.SNAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STATE.SNAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DID })
+        </td>
+    </tr>
+}
+
+</table>

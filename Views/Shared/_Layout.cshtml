@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - My ASP.NET Application</title>
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+	 body, h1, h2, h3, h4, h5 {
+		font-family: "Raleway", sans-serif
+	}
+</style>
+<body style="background-color:teal">
+	<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+		<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+		<span class="w3-bar-item w3-right">Logo</span>
+	</div>
+
+	<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
+		<br>
+		<div class="w3-container w3-row">
+			<div class="w3-col s4">
+			</div>
+			<div class="w3-col s8 w3-bar">
+				<span>Welcome To, <strong>My World</strong></span><br>
+			</div>
+		</div>
+		<hr>
+
+		<div class="w3-bar-block">
+			<a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+			<button class="fa fa-bank fa-fw w3-bar-item w3-button w3-padding">@Html.ActionLink("Create Country", "CreateCountry", "ww")</button>
+			<button class="fa fa-bank fa-fw w3-bar-item w3-button w3-padding">@Html.ActionLink("Create State", "ListState", "ww")</button>
+			<button class="fa fa-bank fa-fw w3-bar-item w3-button w3-padding">@Html.ActionLink("Create District", "AddDist", "ww")</button>
+
+		</div>
+	</nav>
+
+
+	<div class="container body-content">
+		@RenderBody()
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+		</footer>
+	</div>
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@RenderSection("scripts", required: false)
+</body>
+</html>

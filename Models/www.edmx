@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="wwwModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CNAME" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DIST">
+          <Key>
+            <PropertyRef Name="DID" />
+          </Key>
+          <Property Name="DID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DNAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STATE">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SNAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__DIST__SID__1BFD2C07">
+          <End Role="STATE" Type="Self.STATE" Multiplicity="1" />
+          <End Role="DIST" Type="Self.DIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="DIST">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__STATE__CID__164452B1">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+          <End Role="STATE" Type="Self.STATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="STATE">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wwwModelStoreContainer">
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIST" EntityType="Self.DIST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DIST__SID__1BFD2C07" Association="Self.FK__DIST__SID__1BFD2C07">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="DIST" EntitySet="DIST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__STATE__CID__164452B1" Association="Self.FK__STATE__CID__164452B1">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="STATE" EntitySet="STATE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wwwModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="STATEs" Relationship="Self.FK__STATE__CID__164452B1" FromRole="COUNTRY" ToRole="STATE" />
+        </EntityType>
+        <EntityType Name="DIST">
+          <Key>
+            <PropertyRef Name="DID" />
+          </Key>
+          <Property Name="DID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="STATE" Relationship="Self.FK__DIST__SID__1BFD2C07" FromRole="DIST" ToRole="STATE" />
+        </EntityType>
+        <EntityType Name="STATE">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="COUNTRY" Relationship="Self.FK__STATE__CID__164452B1" FromRole="STATE" ToRole="COUNTRY" />
+          <NavigationProperty Name="DISTs" Relationship="Self.FK__DIST__SID__1BFD2C07" FromRole="STATE" ToRole="DIST" />
+        </EntityType>
+        <Association Name="FK__STATE__CID__164452B1">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+          <End Role="STATE" Type="Self.STATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="STATE">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DIST__SID__1BFD2C07">
+          <End Role="STATE" Type="Self.STATE" Multiplicity="1" />
+          <End Role="DIST" Type="Self.DIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="DIST">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wwwEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="COUNTRies" EntityType="Self.COUNTRY" />
+          <EntitySet Name="DISTs" EntityType="Self.DIST" />
+          <EntitySet Name="STATEs" EntityType="Self.STATE" />
+          <AssociationSet Name="FK__STATE__CID__164452B1" Association="Self.FK__STATE__CID__164452B1">
+            <End Role="COUNTRY" EntitySet="COUNTRies" />
+            <End Role="STATE" EntitySet="STATEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DIST__SID__1BFD2C07" Association="Self.FK__DIST__SID__1BFD2C07">
+            <End Role="STATE" EntitySet="STATEs" />
+            <End Role="DIST" EntitySet="DISTs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wwwModelStoreContainer" CdmEntityContainer="wwwEntities">
+          <EntitySetMapping Name="COUNTRies">
+            <EntityTypeMapping TypeName="wwwModel.COUNTRY">
+              <MappingFragment StoreEntitySet="COUNTRY">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="CNAME" ColumnName="CNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISTs">
+            <EntityTypeMapping TypeName="wwwModel.DIST">
+              <MappingFragment StoreEntitySet="DIST">
+                <ScalarProperty Name="DID" ColumnName="DID" />
+                <ScalarProperty Name="DNAME" ColumnName="DNAME" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATEs">
+            <EntityTypeMapping TypeName="wwwModel.STATE">
+              <MappingFragment StoreEntitySet="STATE">
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="SNAME" ColumnName="SNAME" />
+                <ScalarProperty Name="CID" ColumnName="CID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

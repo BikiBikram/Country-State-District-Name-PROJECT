@@ -1,0 +1,32 @@
+﻿@model IEnumerable<w.Models.Multipleclass>
+@{
+	ViewBag.Title = "AllList";
+}
+<style>
+	.container-fluid {
+		color:darksalmon;
+		margin-left: 250px;
+	}
+</style>
+<div class="container-fluid">
+	<h2>AllList</h2>
+
+	<hr />
+	<table>
+		<tr>
+			<td>Country Name</td>
+
+			<td>State  Name</td>
+			<td>District Name</td>
+
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.countrydetails.CNAME</td>
+				<td>@item.statedetails.SNAME</td>
+				<td>@item.distdetails.DNAME</td>
+			</tr>
+		}
+	</table>
+	</div>
